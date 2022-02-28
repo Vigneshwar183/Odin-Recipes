@@ -1,11 +1,26 @@
+.body{
+    margin:0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.page{
+    height:100vh;
+}
+
+.page-content{
+    height: calc(100vh - 200px);
+}
 .header{
     display: flex;
     justify-content: space-between;
     background-color: #1f2937;
     align-items: center;
     color: white;
+    height:100px;
     padding: 10px;
-    height: 30px;
 }
 
 .header-right{
@@ -74,4 +89,33 @@
 .text{
     background-color: grey;
     text-align: center;
+    height: 25%;
+}
+
+.dialog-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dialog{
+    display: flex;
+    justify-content: space-between;
+    background-color: skyblue;
+    height: 50%;
+    flex-wrap:wrap;
+    align-items: center;
+}
+
+.dialog-text1{
+    font-weight: 700;
+}
+
+.footer{
+    background-color: #1f2937;
+    height:100px;
+    text-align: center;
+}
+
+.footer p{
+    margin:0
 }
