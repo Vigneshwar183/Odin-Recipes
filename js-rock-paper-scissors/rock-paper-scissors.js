@@ -44,29 +44,44 @@ function playRound(playerSelection,computerSelection){
     }
 }
 
-function game(){
-    let user=0;
-    let comp=0;
-    for(let i=0; i<5;i++){
-        let playerSelection=prompt("Enter Rock, Paper or Scissors");
-        let computerSelection=computerPlay();
-        let result=playRound(playerSelection,computerSelection)
-        if(result==="win"){
-            user++;
-        }
-        else{
-            comp++;
-        }
-    }
-    if(user>comp){
-        console.log(`You win!`);
-    }
-    else if(comp>user){
-        console.log('You lose!');
+function game(event){
+    let playerSelection=event.getAttribute('value');
+    console.log(playerSelection);
+    let computerSelection=computerPlay();
+    let result=playRound(playerSelection,computerSelection)
+    if(result==="win"){
+        user++;
     }
     else{
-        console.log('Draw');
+        comp++;
+    }
+    let container=document.querySelector('#result');
+    console.log(container);
+    if (container){
+        let div=document.getElementById('result')
+        div.textContent=`user: ${user};comp: ${comp}`;
+    }else{
+        div=document.createElement('div');
+        div.setAttribute('id','result');
+        div.textContent=`user: ${user};comp: ${comp}`;
+    }
+    let parent=document.getElementById('results-container');
+    parent.appendChild(div)
+    if (user===5){
+        let div=document.getElementById('result')
+        div.textContent=`user wins`;
+    }else if(comp===5){
+        let div=document.getElementById('result')
+        div.textContent=`comp wins`;
     }
 }
 
-game();
+let user=0;
+let comp=0;
+let buttons=document.querySelectorAll('.btn');
+buttons.forEach(element => {
+    console.log(element)
+    element.addEventListener('click',(event)=>{
+        game(event.target);
+    });
+});
