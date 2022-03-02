@@ -1,0 +1,31 @@
+body{
+    margin:0px;
+}
+
+.calculator{
+    box-sizing: border-box;
+    height:100px;
+    width:100px;
+}
+
+.digits-operator{
+    display:flex;
+    justify-content: space-between;
+}
+
+.digits-container{
+    display:flex;
+    width:60px;
+    flex-wrap: wrap;
+}
+
+.operator-container{
+    display:flex;
+    flex-direction: column;
+    height:90px;
+}
+
+.digits{
+    height:20px;
+    width:20px;
+}
