@@ -21,27 +21,27 @@
                         <div class="input-form">
                             <div class="label-input-pair">
                                 <div><label for="first-name">FIRST NAME</label></div>
-                                <div><input id="first-name" type="text" name="first-name" placeholder="Thor"></div>
+                                <div><input id="first-name" type="text" name="first-name" placeholder="Thor" minlength="1"></div>
                             </div>
                             <div class="label-input-pair">
                                 <div><label for="last-name">LAST NAME</label></div>
-                                <div><input id="last-name"type="text" name="last-name" placeholder="Odinson"></div>
+                                <div><input id="last-name"type="text" name="last-name" placeholder="Odinson" minlength="1"></div>
                             </div>
                             <div class="label-input-pair">
                                 <div><label for="email">EMAIL</label></div>
-                                <div><input id="email" type="email" name="email" placeholder="abc@xyz.com"></div>
+                                <div><input id="email" type="email" name="email" placeholder="abc@xyz.com" pattern="/[a-zA-Z0-9]+[@][a-z]+[.com]/"></div>
                             </div>
                             <div class="label-input-pair">
                                 <div><label for="phone-number">PHONE NUMBER</label></div>
-                                <div><input id="phone-number" type="text" name="number" placeholder="1234567890"></div>
+                                <div><input id="phone-number" type="text" name="number" placeholder="1234567890" pattern="[1-9][0-9]{9}" ></div>
                             </div>
                             <div class="label-input-pair">
                                 <div><label for="password">PASSWORD</label></div>
-                                <div><input id="password" type="text" name="password"></div>
+                                <div><input id="password" type="text" name="password" minlength="6" required></div>
                             </div>
                             <div class="label-input-pair">
                                 <div><label for="password">CONFIRM PASSWORD</label></div>
-                                <div><input id="password" type="text" name="c-password"></div>
+                                <div><input id="password" type="text" name="c-password" minlength="6" required></div>
                             </div>
                         </div>
                     </form>
