@@ -1,0 +1,23 @@
+body{
+    margin:0;
+}
+.page-container{
+    display:grid;
+    grid-template-columns:25% 50% 25%;
+    grid-template-rows: 20% 40% 40%;
+}
+
+.parent-sidebar{
+    grid-area: 1/1/4/2;
+    background-color: aqua;
+}
+
+.header{
+    grid-area: 1/2/2/4;
+}
+
+.content{
+    grid-area: 2/2/4/3;
+    background-color: grey;
+}
+
