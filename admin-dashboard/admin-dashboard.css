@@ -3,21 +3,59 @@ body{
 }
 .page-container{
     display:grid;
-    grid-template-columns:25% 50% 25%;
-    grid-template-rows: 20% 40% 40%;
+    /* width: 100vw;
+    height: 90vw; */
+    grid-template-columns:repeat(5, 6fr);
+    grid-template-rows: repeat(4,5fr);
 }
 
-.parent-sidebar{
-    grid-area: 1/1/4/2;
+.parent-sidebar-header{
+    grid-area: 1/1/2/3;
+    background-color: aqua;
+}
+
+.parent-sidebar-content{
+    grid-area:2/1/4/3;
+    background-color: aqua;
+}
+
+.parent-sidebar-footer{
+    grid-area:4/1/6/3;
     background-color: aqua;
 }
 
 .header{
-    grid-area: 1/2/2/4;
+    grid-area: 1/3/2/6;
+    display:flex;
+    justify-content: space-between;
 }
 
+.header-left{
+    display: flex;
+}
+
+.header-right{
+    display:flex;
+    justify-content: space-between;
+}
+
+.welcome-message{
+    grid-area: 2/3/3/6;
+    display:flex;
+    justify-content: space-between;
+}
+
+.welcome-message-left{
+    display:flex;
+}
+
+.welcome-message-right{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .content{
-    grid-area: 2/2/4/3;
+    grid-area: 3/3/6/6;
     background-color: grey;
 }
 
