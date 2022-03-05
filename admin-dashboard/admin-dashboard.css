@@ -1,27 +1,60 @@
 body{
     margin:0;
 }
+
+img{
+    padding: 10px;
+}
+
+button{
+    margin:10px;
+    background-color: aqua;
+    border-radius: 20%;
+}
+
+
 .page-container{
     display:grid;
-    /* width: 100vw;
-    height: 90vw; */
-    grid-template-columns:1fr 2fr 1fr;
-    grid-template-rows: repeat(3,5fr);
+    grid-template-columns:1fr 3fr 1fr;
+    grid-template-rows: 1fr 2fr 2fr;
 }
 
 .parent-sidebar-header{
     grid-area: 1/1/2/2;
     background-color: aqua;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.parent-sidebar-content>div{
+    display:flex;
+    align-items: center;
 }
 
 .parent-sidebar-content{
     grid-area:2/1/4/2;
     background-color: aqua;
+    padding: 10px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 .parent-sidebar-footer{
     grid-area:3/1/4/2;
     background-color: aqua;
+    padding: 10px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.parent-sidebar-footer>div{
+    display:flex;
+    align-items: center;
 }
 
 .header-main{
@@ -33,9 +66,17 @@ body{
 .header{
     grid-row: 1/2;
     display:flex;
+    align-items: center;
     justify-content: space-between;
+    padding: 10px;
+    align-items: center;
 }
 
+.header>div{
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+}
 .header-left{
     display: flex;
 }
@@ -47,8 +88,16 @@ body{
 
 .welcome-message{
     grid-area: 2/1/3/2;
+    align-items: center;
     display:flex;
     justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+}
+.welcome-message>div{
+    align-items: center;
+    font-size: 30px;
+    font-weight: 700;
 }
 
 .welcome-message-left{
@@ -61,12 +110,12 @@ body{
     align-items: center;
 }
 .content-container{
-
     grid-area: 2/2/4/4;
     background-color: grey;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr 1fr;
     display:grid;
+    padding: 10px;
 }
 
 .content-grid{
@@ -75,11 +124,13 @@ body{
 
 .content{
     background-color: azure;
+    padding: 10px;
+    box-shadow: 10px 5px 5px;
 }
 
 .content-footer{
     display:flex;
-    text-align: right;
+    float: right;
 }
 
 .projects{
@@ -88,19 +139,38 @@ body{
     height: 90%;
     grid-template-columns: repeat(2,1fr);
     grid-template-rows: repeat(3,1fr);
-    gap:5%
+    gap:5%;
+    padding: 10px;
 }
 
 .content-sidebar{
     grid-area: 1/5/5/6;
     display: grid;
     grid-template-rows: repeat(auto-fit,1fr);
+    padding: 10px;
 }
 
 .annoucements{
     grid-area: 1/1/2/1;
 }
 
+.announcements-content{
+    padding: 10px;
+    background-color: azure;
+    box-shadow: 10px 5px 5px;
+}
+
 .trending{
     grid-area: 2/1/3/1;
+}
+
+.trending-content{
+    padding:10px;
+    background-color: azure;
+    align-items: center;
+    box-shadow: 10px 5px 5px;
+}
+
+.trending-content>div{
+    display: flex;
 }
