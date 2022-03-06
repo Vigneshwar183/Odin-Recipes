@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Library
+        </title>
+        <link rel="stylesheet" href="./library.css">
+        <script src="./library.js" defer></script>
+    </head>
+    <body>
+        <div class="parent">
+            <h1>Library</h1>
+            <p>Welcome to our Library!!</p>
+            <p>Fill the form below and press the add button to add the book.</p>
+            <form>
+                <div class="form-content">
+                    <label for="book-name">Book Name</label>
+                    <input type="text" id="book-name" name="bookName" placeholder="Book Name">
+                </div>
+                <div class="form-content">
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author" placeholder="Author Name">
+                </div>
+                <div class="form-content">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Describe the book" rows="3" ></textarea>
+                </div>
+                <div class="form-content">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price" placeholder="price" >
+                </div>
+                <button id="button" type="submit">Add</button>
+            </form>
+        </div>
+    </body>
+</html>

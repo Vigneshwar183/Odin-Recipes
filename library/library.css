@@ -1,0 +1,29 @@
+body{
+    margin: 0;
+}
+
+.parent{
+    width:80%;
+    margin:0 auto;
+    background-color: grey;
+}
+
+.parent h1{
+    margin:0;
+}
+
+.parent p{
+    margin:0;
+}
+
+.form-content{
+    display: flex;
+}
+
+.form-content label{
+    width: 20%;
+}
+
+.form-content id{
+    width: 40%;
+}
