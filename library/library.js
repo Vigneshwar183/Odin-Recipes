@@ -20,7 +20,20 @@ function updateTable(){
             td.innerHTML=library[i][key];
             row.appendChild(td);
         }
+        let read=document.createElement('input');
+        read.setAttribute('type','checkbox');
+        row.appendChild(read);
+        let remove=document.createElement('button');
+        remove.setAttribute('type','submit');
+        remove.innerHTML='remove';
+        
+        row.appendChild(remove);
         parent.appendChild(row);
+
+        remove.addEventListener('onclick',()=>{
+            console.log('hi');
+            row.remove();
+        })
     }
 }
 
@@ -103,8 +116,8 @@ function addForm(){
         addBookToLibrary(book);
     }
 
-let display=document.querySelector('.display');
-display.addEventListener('click',updateTable);
+    let display=document.querySelector('.display');
+    display.addEventListener('click',updateTable);
 }
 
 let library=[]
