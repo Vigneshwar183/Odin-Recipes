@@ -27,3 +27,11 @@ body{
 .form-content id{
     width: 40%;
 }
+
+th{
+    padding: 5px;
+}
+
+button{
+    border-radius: 25px;
+}
