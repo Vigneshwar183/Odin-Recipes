@@ -12,7 +12,9 @@ function addBookToLibrary(Book){
 
 function updateTable(){
     let parent=document.querySelector('table');
-    for (i in library){
+    i=displayedElements;
+    length=library.length;
+    for (;i<length;i++){
         let row=document.createElement('tr');
         for (key in library[i]){
             let td=document.createElement('td');
@@ -23,17 +25,21 @@ function updateTable(){
         let read=document.createElement('input');
         read.setAttribute('type','checkbox');
         row.appendChild(read);
+
         let remove=document.createElement('button');
         remove.setAttribute('type','submit');
         remove.innerHTML='remove';
-        
-        row.appendChild(remove);
-        parent.appendChild(row);
-
-        remove.addEventListener('onclick',()=>{
+        remove.onclick=()=>{
             console.log('hi');
             row.remove();
-        })
+        }
+        row.appendChild(remove);
+
+        row.appendChild(remove);
+
+        parent.appendChild(row);
+
+        displayedElements+=1
     }
 }
 
@@ -101,28 +107,24 @@ function addForm(){
     
     parent.appendChild(form);
 
-    let btn2=document.createElement('button');
-    btn2.setAttribute('class','display');
-    btn2.setAttribute('type','submit');
-    btn2.innerHTML='Display';
-
-    parent.appendChild(btn2);
-
-
     let form1=document.querySelector('form');
     form1.onsubmit=(event)=>{
         event.preventDefault();
         let book=new Book(event);
         addBookToLibrary(book);
+        console.log(library);
     }
 
-    let display=document.querySelector('.display');
-    display.addEventListener('click',updateTable);
 }
 
-let library=[]
+let library=[];
+let displayedElements=0;
 addBookToLibrary.prototype=Object.create(Book.prototype);
 addForm.prototype=Object.create(Book.prototype);
 
 let addFormButton=document.querySelector('.addForm');
 addFormButton.addEventListener('click',addForm);
+
+
+let display=document.querySelector('.display');
+display.addEventListener('click',updateTable);
