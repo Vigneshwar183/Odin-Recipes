@@ -1,7 +1,7 @@
 function weather(location){
     // let response= await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=d902eb5b1b4b5a9fb9e699f6cd2869ee`,{mode:'cors'});
     // console.log(response);
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=d902eb5b1b4b5a9fb9e699f6cd2869ee`,{mode:'cors'})
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=addkeyhere`,{mode:'cors'})
         .then(response=>{
             return response.json();
         })
