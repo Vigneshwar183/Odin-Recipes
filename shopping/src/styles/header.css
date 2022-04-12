@@ -1,0 +1,17 @@
+.parent{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 5px 5px;
+}
+
+.headerLeft{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.headerRight{
+    display:flex;
+    justify-content: space-between;
+}
