@@ -1,21 +1,22 @@
 import React , { Component } from "react";
+import '../styles/footer.css'
 
 class Footer extends Component{
     render(){
         return(
-            <div className="parent">
-                <div className="section1">
+            <div className="footer">
+                <div className="section">
                     <h3>Online Store</h3>
                     <p>Dress</p>
                     <p>Shoes</p>
                 </div>
-                <div className="section2">
+                <div className="section">
                     <h3>Helpful Links</h3>
                     <p>Home</p>
                     <p>About</p>
                     <p>Contact</p>
                 </div>
-                <div className="section3">
+                <div className="section">
                     <h3>Addres</h3>
                     <p>Building 101</p>
                     <p>Central Avenue</p>

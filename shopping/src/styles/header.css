@@ -1,4 +1,4 @@
-.parent{
+.header{
     display:flex;
     justify-content: space-between;
     align-items: center;
@@ -9,9 +9,11 @@
     display:flex;
     justify-content: space-around;
     align-items: center;
+    width:30%;
 }
 
 .headerRight{
     display:flex;
     justify-content: space-between;
+    width:40%;
 }
