@@ -7,13 +7,18 @@
 
 .headerLeft{
     display:flex;
-    justify-content: space-around;
     align-items: center;
     width:30%;
+    justify-content: space-evenly;
 }
 
 .headerRight{
     display:flex;
-    justify-content: space-between;
-    width:40%;
+    width:20%;
+    justify-content: space-evenly;
+}
+
+a{
+    text-decoration: none;
+    color: black;
 }

@@ -1,4 +1,5 @@
 import React , { Component } from "react";
+import '../styles/accessories.css';
 
 class Accessories extends Component{
     constructor(){
@@ -20,16 +21,16 @@ class Accessories extends Component{
     }
 
     render(){
-        return(
+        return this.state.accessories!==null?(
             <div className="Accessories">
                 {this.state.accessories.map(item=>
-                    <div className="accessory">
-                        <img src={item.preview} alt=''></img>
-                        <p>{item.name}</p>
-                    </div>
+                <div className="accessory">
+                    <img src={item.preview} alt=''></img>
+                    <p>{item.name}</p>
+                </div>
                 )}
             </div>
-        )
+        ):<div>Loading</div>
     }
 }
 
