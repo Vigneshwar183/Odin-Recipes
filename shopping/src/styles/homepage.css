@@ -1,0 +1,13 @@
+.cards{
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.card{
+    width:19%;
+}
+
+.card img{
+    width:100%;
+}
