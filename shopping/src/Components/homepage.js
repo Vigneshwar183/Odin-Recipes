@@ -1,4 +1,5 @@
 import React , {Component} from "react";
+import {Link} from "react-router-dom";
 import '../styles/homepage.css';
 
 class Homepage extends Component{
@@ -32,19 +33,23 @@ class Homepage extends Component{
                 <h2>Clothing for Men and Women</h2>
                 <div className="cards">
                     {this.state.clothes.map(item=>
-                        <div className="card">
-                            <img src={item.preview} alt=''></img>
-                            <p>{item.name}</p>
-                        </div>
+                        <Link to={'/product/'+item.id}>
+                            <div className="card">
+                                <img src={item.preview} alt=''></img>
+                                <p>{item.name}</p>
+                            </div>
+                        </Link>
                     )}
                 </div>
                 <h2>Accessories for Men and Women</h2>
                 <div className="cards">
                     {this.state.accessories.map(item =>(
-                        <div className="card">
-                            <img src={item.preview} alt=''></img>
-                            <p>{item.name}</p>
-                        </div>
+                        <Link to={'/product/'+item.id}>
+                            <div className="card">
+                                <img src={item.preview} alt=''></img>
+                                <p>{item.name}</p>
+                            </div>
+                        </Link>
                     ))}
                 </div>
             </div>
