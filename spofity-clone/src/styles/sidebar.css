@@ -1,0 +1,13 @@
+.sidebar{
+    background-color: black;
+    flex:0.2;
+    min-width: 230px;
+    height: 100vh;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sidebar img{
+    width:100%;
+}

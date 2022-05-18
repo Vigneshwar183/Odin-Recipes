@@ -1,0 +1,1 @@
+Used spotify api from npm library, react context api

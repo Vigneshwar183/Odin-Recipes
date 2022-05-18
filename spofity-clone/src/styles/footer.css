@@ -1,0 +1,48 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 65px;
+    width: 100%;
+    background-color: lightgray;
+    display:flex;
+    justify-content: space-between;
+}
+
+.footerLeft{
+    flex:0.3;
+    display:flex;
+    align-items: center;
+}
+
+.footerLeft img{
+    width:60px;
+    height:60px;
+}
+
+.footerCenter{
+    flex:0.4;
+    padding: 0 100px;
+    align-items: center;
+    display:flex;
+    justify-content: space-between;
+}
+
+.footerRight{
+    flex:0.3;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footerGreen{
+    color:green;
+}
+
+.footerIcon:hover, .footerGreen:hover{
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.2) !important;
+}
+
+.footerRight .MuiSlider-root{
+    color:green;
+}
