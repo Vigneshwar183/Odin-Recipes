@@ -1,0 +1,15 @@
+.songs img{
+    height: 50px;
+    padding: 10px;
+}
+
+.songs{
+    display:flex;
+    align-items: center;
+}
+
+.songs:hover{
+    cursor:pointer;
+    background-color: black;
+    opacity:0.8;
+}

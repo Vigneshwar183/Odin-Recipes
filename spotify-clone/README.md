@@ -1,1 +1,1 @@
-Used spotify api from npm library, react context api
+Used spotify api from npm library, react context api, flexbox(css),user Authentication

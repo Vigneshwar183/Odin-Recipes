@@ -1,6 +1,30 @@
 .body {
     flex: 0.8;
-    background-color: grey;
-    background: linear-gradient(transparent, rgba(0,0,0,1));
+    /* background-color: grey;
+    background: linear-gradient(transparent, rgb(3, 66, 66)); */
+    background-color: #000000;
+    background-image: linear-gradient(147deg, #04619f 0%,#000000 74%);
     color: white;
+    padding:10px;
+    height:100vh;
+    overflow-y: overlay;
+}
+
+.body_info{
+    display:flex;
+    align-items: center;
+}
+
+.body_info img{
+    height:30vh;
+    padding: 10px;
+}
+
+.body_icons .MuiSvgIcon-root{
+    font-size: 60px !important;
+}
+
+.body_icons .MuiSvgIcon-root:hover{
+    transition: 100ms transform ease-in;
+    transform: scale(1.08)
 }

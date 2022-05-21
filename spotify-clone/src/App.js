@@ -8,8 +8,8 @@ import { useDataLayerValue } from "./Components/DataLayer";
 const spotify= new SpotifyWebApi();
 
 function App() {
-  const [{user, token}, dispatch] = useDataLayerValue();
-
+  const [{user, token, currentPlaylist}, dispatch] = useDataLayerValue();
+  console.log(currentPlaylist);
   useEffect(()=>{
     const hash= getTokenFromUrl();
     window.location.hash="";
@@ -32,15 +32,32 @@ function App() {
           user: user,
         });
       });
-      spotify.getUserPlaylists().then((playlists)=>{
-        dispatch({
-          type: "SET_PLAYLISTS",
-          playlists:playlists,
+      spotify.getUserPlaylists()
+        .then((playlists)=>{
+          dispatch({
+            type: "SET_PLAYLISTS",
+            playlists:playlists,
+          })
+          dispatch({
+            type:"SET_CURRENT_PLAYLIST",
+            currentPlaylist:playlists.items.length>0 ? playlists.items[0].id : null,
+          })
         })
-      })
     }
 
   },[])
+
+  useEffect(()=>{
+    if (currentPlaylist)
+    {
+      spotify.getPlaylist(currentPlaylist).then((response) => 
+        dispatch({
+          type:"SET_CURRENT_PLAYLIST_DATA",
+          currentPlaylistData:response,
+        })
+      )
+    }
+  },[currentPlaylist])
 
   return (
     <div className="App">

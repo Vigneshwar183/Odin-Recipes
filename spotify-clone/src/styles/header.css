@@ -1,0 +1,19 @@
+.header{
+    display:flex;
+    justify-content: space-between;
+    padding:10px;
+}
+
+.headerRight{
+    display:flex;
+    align-items: center;
+    background-color: black;
+    border-radius: 99px;
+}
+
+.headerLeft{
+    background-color: black;
+    border-radius: 30px;
+    padding: 10px;
+    align-items: center;
+}

@@ -4,6 +4,8 @@ const initialState ={
     playing : false,
     item: null,
     token: null,
+    currentPlaylist: "",
+    currentPlaylistData:null,
 };
 
 const reducer = (state,action)=> {
@@ -24,6 +26,16 @@ const reducer = (state,action)=> {
             return{
                 ...state,
                 playlists:action.playlists,
+            }
+        case "SET_CURRENT_PLAYLIST":
+            return{
+                ...state,
+                currentPlaylist: action.currentPlaylist,
+            }
+        case "SET_CURRENT_PLAYLIST_DATA":
+            return{
+                ...state,
+                currentPlaylistData:action.currentPlaylistData,
             }
         default:
             return state
