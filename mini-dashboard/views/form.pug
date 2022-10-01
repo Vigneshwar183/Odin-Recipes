@@ -1,0 +1,13 @@
+doctype html
+html
+    head
+        title= title
+    body
+        form(role='form' method='POST' action='/new')
+            div.form-group
+                label(for='name') Name:
+                input(type='text', placeholder='Name', name='name')
+            div.form-group
+                label(for='message') Message:
+                input(type='text', placeholder='Message', name='message')
+            button(type='submit') Submit

@@ -1,0 +1,9 @@
+extends layout.pug
+
+block content
+  h1= title
+  each message in messages
+    p=message.text
+    p=message.user
+    p=message.added
+  a(href='/new') Form
