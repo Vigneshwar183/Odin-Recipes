@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose')
 
-const mongoDB = "mongodb+srv://vadacurry:vadacurry@cluster0.2viaxcb.mongodb.net/?retryWrites=true&w=majority"
+const mongoDB = ""
 mongoose.connect(mongoDB,{useNewUrlParser: true, useUnifiedTopology:true});
 const db = mongoose.connection;
 db.on('error',console.error.bind(console,'MongoDB connection error:'));
