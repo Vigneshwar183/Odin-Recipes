@@ -23,11 +23,24 @@ exports.index = (req, res) => {
 };
 
 exports.item_list = (req, res) => {
-  res.send("NOT IMPLEMENTED: Book list");
+    Item.find({},"name price")
+    .sort({name:1})
+    .populate('category')
+    .exec(function(err,list_items){
+        if (err){
+            return next(err)
+        }
+        res.render("item_list",{title:"Item list", item_list: list_items})
+    })
 };
 
-exports.item_detail = (req, res) => {
-  res.send(`NOT IMPLEMENTED: Book detail: ${req.params.id}`);
+exports.item_detail = (req, res, next) => {
+    Item.findById(req.params.id).exec(function(err,item){
+        if(err){
+            return next(err)
+        }
+        res.render("item_detail",{title:'Item Detail', item:item})
+    })
 };
 
 exports.item_create_get = (req, res) => {
