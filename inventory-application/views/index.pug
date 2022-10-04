@@ -2,4 +2,14 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #[em Inventory], a very basic express website developed as part of Odin Project
+
+  h1 Dynamic Content
+
+  if error
+    p Error getting dynamic Content
+  else 
+    p The store has the following record counts: 
+    ul 
+      li #[strong Items:] !{data.item_count}
+      li #[strong Category:] !{data.category_count}

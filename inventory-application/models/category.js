@@ -2,14 +2,14 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const CategorySchema = Schema({
+const CategorySchema = new Schema({
     name:String
 })
 
 CategorySchema.virtual('url').get(function(){
-    return `/catalog/item/${this.__id}`
+    return `/catalog/category/${this.__id}`
 })
 
-const CategoryModel = mongoose.model('CategoryModel',CategorySchema)
+const categoryModel = mongoose.model('categoryModel',CategorySchema)
 
-module.exports = CategoryModel
+module.exports = categoryModel
