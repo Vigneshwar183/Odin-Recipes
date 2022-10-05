@@ -4,8 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose')
+require('dotenv').config();
 
-const mongoDB = ""
+const mongoDB = process.env.mongodb
 mongoose.connect(mongoDB,{useNewUrlParser: true, useUnifiedTopology:true});
 const db = mongoose.connection;
 db.on('error',console.error.bind(console,'MongoDB connection error:'));
