@@ -11,10 +11,10 @@ block content
             textarea#description.form-control(type='textarea', placeholder='description' name='description' required='true') #{undefined===item?'': item.description}
         div.form-group
             label(for='price') Price: 
-            input#price.form-control(type='number' value=(undefined===item?0:item.price) required='true')
+            input#price.form-control(type='number' name='price' value=(undefined===item?0:item.price) required='true')
         div.form-group
             label(for='number_in_stock') Number in stock:
-            input#number_in_stock.form-control(type='number' value=(undefined===item?0:item.number_in_stock) required='true')
+            input#number_in_stock.form-control(type='number' name='number_in_stock' value=(undefined===item?0:item.number_in_stock) required='true')
         div.form-group
             label Category: 
             div 

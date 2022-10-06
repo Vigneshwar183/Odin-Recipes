@@ -7,3 +7,11 @@ block content
     p #[strong description:] #{item.description}
     p #[strong price:] #{item.price}
     p #[strong number in stock:] #{item.number_in_stock}
+
+    hr
+    p 
+        a(href=item.url+'/update')  Update Item
+    p
+        a(href=item.url+'/delete')  Delete Item
+    p
+        a(href='/catalog') Home 

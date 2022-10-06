@@ -2,6 +2,8 @@ const async = require('async')
 const Category = require('../models/category')
 const Item = require('../models/item')
 const {body, validationResult } = require('express-validator')
+const { Model } = require('mongoose')
+const { item_list } = require('./itemController')
 
 
 exports.category_list= (req,res,next)=>{
@@ -73,18 +75,117 @@ exports.category_create_post = [
   }
 ]
 
-exports.category_delete_get = (req, res) => {
-    res.send("NOT IMPLEMENTED: Genre delete GET");
+exports.category_delete_get = (req, res, next) => {
+    async.parallel(
+      {
+        category(callback){
+          Category.findById(req.params.id).exec(callback);
+        },
+          category_items(callback){
+            Item.find({category: req.params.id}).exec(callback);
+        },
+      },
+      function(err,results){
+        if(err){
+          return next(err)
+        }
+        if (results.category == null){
+          res.redirect('/catalog/category/')
+        }
+        res.render('category_delete',{
+          title: 'Category Delete',
+          category: results.category,
+          category_items: results.category_items
+        })
+      }
+    )
   };
   
-exports.category_delete_post = (req, res) => {
-    res.send("NOT IMPLEMENTED: Genre delete POST");
-  };
+exports.category_delete_post = [
+  body('Category').trim(),
+  body('_id').trim(),
+  (req, res, next) => {
+    async.parallel(
+      {
+        category(callback){
+          Category.findById(req.body.id).exec(callback)
+        },
+        category_items(callback){
+          Item.find({category:req.body.id}).exec(callback)
+        }
+      },
+      function(err,results){
+        if (err){
+          return next(err)
+        }
+        if (results.category_items.length>0){
+          res.render('category_delete',{
+            title: 'Delete Category',
+            category: results.category,
+            category_items: results.category_items
+          })
+          return
+        }else{
+          const trimmedCategoryId= req.body.categoryid.trim()
+          Category.findByIdAndDelete(trimmedCategoryId,function deleteCategory(err){
+            if(err){
+              return next(err)
+            }
+            res.redirect('/catalog/category')
+          })
+        }
+      }
+    )
+  }
+]
   
 exports.category_update_get = (req, res) => {
-    res.send("NOT IMPLEMENTED: Genre update GET");
-  };
+  Category.findById(req.params.id).exec(function(err,category){
+    if (err){
+      return next(err)
+    }
+    if (category== null){
+      const err= new Error('Category not found')
+      err.status=404
+      return next(err)
+    }
+    res.render('category_form',{
+      title: "Update Category",
+      category: category
+    })
+  })
+};
   
-exports.category_update_post = (req, res) => {
-    res.send("NOT IMPLEMENTED: Genre update POST");
-  };
+exports.category_update_post = [
+  body('name', 'Category name')
+    .trim()
+    .isLength({min:3})
+    .escape(),
+  (req, res, next)=>{
+    const errors = validationResult(req)
+    var category = new Category({
+      name: req.body.name,
+      _id:req.params.id
+    })
+    if (!errors.isEmpty()){
+      res.render('category_form',{
+        title: 'Update Category',
+        category: category,
+        errors: errors.array()
+      })
+      return
+    } else{
+      Category.findByIdAndUpdate(
+        req.params.id,
+        category,
+        {},
+        function(err,thecategory){
+          if(err){
+            return next(err)
+          }
+          res.redirect(thecategory.url)
+        }
+      )
+    }
+  }
+]

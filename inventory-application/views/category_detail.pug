@@ -12,3 +12,10 @@ block content
                 dd #{item.description}
             else 
                 p This category has no items 
+    hr
+    p 
+        a(href=category.url+'/update')  Update Category
+    p
+        a(href=category.url+'/delete')  Delete Category
+    p
+        a(href='/catalog') Home 

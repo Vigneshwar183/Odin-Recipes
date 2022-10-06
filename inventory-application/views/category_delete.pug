@@ -1,0 +1,19 @@
+extends layout 
+
+block content 
+    h1 #{title}
+
+    p Delete the following items before attempting to delete this category
+
+    ul 
+        each item in category_items
+            li 
+                a(href=item.url) #{item.name}
+        else 
+            p This category has no items
+    
+    p Do you really want to delete this category?
+    form(method='POST' action='')
+        input(type='hidden', id='categoryid', name='categoryid' required='true' value=category._id)
+        button.btn.btn-primary(type='submit') Delete
+    
