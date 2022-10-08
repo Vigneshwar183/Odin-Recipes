@@ -17,7 +17,11 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    username: String,
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
     membershipStatus : Boolean
 })
 

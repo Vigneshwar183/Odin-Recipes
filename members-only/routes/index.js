@@ -4,9 +4,9 @@ const userController = require('../controllers/userController')
 const postsController = require('../controllers/postsController')
 
 /* GET home page. */
-router.get('/', (req,res,next)=>{
-  res.render('index',{ title: 'Home'})
-})
+router.get('/', userController.index_get)
+
+router.post('/', userController.index_post)
 
 router.get('/sign-up', userController.sign_up_get)
 

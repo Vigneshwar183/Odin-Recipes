@@ -4,6 +4,11 @@ block content
   h1= title
   p Welcome to #{title}
 
+  if user
+    p Welcome back #{user.username}
+    form(method='POST' action='')
+      button.btn.btn-primary(type='submit') Submit
+
   p 
     a(href='/sign-up') Sign Up 
   p 

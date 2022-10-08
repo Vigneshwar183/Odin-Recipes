@@ -4,6 +4,16 @@ const Post = require('../models/posts')
 const {body, validationResult, validationErrors} = require('express-validator')
 const brycpt = require('bcryptjs')
 const userModel = require('../models/user')
+const passport = require('passport')
+const localStrategy = require('passport-local')
+
+exports.index_get = (req, res, next)=>{
+    res.render('index', {title: 'Home', user: req.user})
+}
+
+exports.index_post = (req, res, next)=>{
+    res.send('Not implemented')
+}
 
 exports.sign_up_get= (req, res, next)=>{
     res.render('sign-up',{title: 'Sign Up'})
@@ -28,10 +38,19 @@ exports.sign_up_post = [
                 return false
             }
         }),
-    (req, res, next)=>{
+    async (req, res, next)=>{
         const errors = validationResult(req)
-        console.log(req.body)
-        if (!errors.isEmpty()){
+        const usernameExists =await User.findOne({username: req.body.username})
+        if (usernameExists){
+            const error= new Error('Username exists')
+            error.statusCode= 400
+            error.msg= 'Username exists'
+            console.log(error.message)
+            errorArray=[]
+            errorArray.push(error)
+            console.log(errorArray)
+            res.render('sign-up',{title: 'Sign up', errors:errorArray})
+        } else if (!errors.isEmpty()){
             res.render('sign-up',{title: 'Sign up', errors:errors.array()})
         }
         else{
@@ -61,6 +80,7 @@ exports.login_get = (req, res, next)=>{
     res.render('login', {title: 'Login'})
 }
 
-exports.login_post = (req, res, next)=>{
-    res.send('not implemented')
-}
+exports.login_post = passport.authenticate('local',{
+    successRedirect:'/',
+    failureRedirect:'/login'
+})

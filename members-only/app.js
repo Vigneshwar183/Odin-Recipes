@@ -8,6 +8,8 @@ const passport = require('passport');
 const localStrategy = require('passport-local');
 const mongoose = require('mongoose');
 require('dotenv').config()
+const User = require('./models/user')
+const bcrypt = require('bcryptjs')
 
 const mongodb = process.env.mongodb;
 mongoose.connect(mongodb,{useUnifiedTopology: true})
@@ -28,6 +30,31 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+passport.use(new localStrategy((username, password, done)=>{
+  User.findOne({username: username},(err, user)=>{
+    if (err) return done(err)
+    if (!user) return done(null, false, {message: 'Incorrect Username'})
+    bcrypt.compare(password, user.password, (err,result)=>{
+      if (err) return done(err)
+      if (result) return done(null, user)
+      else return done(null, false, {message:'Incorrect password'})
+    })
+  })
+}))
+
+passport.serializeUser((user, done) =>done(null, user.id))
+passport.deserializeUser((id, done)=>User.findById(id,(err, user)=> done(err, user)))
+
+app.use(session({secret:process.env.secret, resave: false, saveUninitialized: true}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(express.urlencoded({extended: false}))
+
+app.use((req, res, next)=>{
+  res.locals.user = req.user
+  next()
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
