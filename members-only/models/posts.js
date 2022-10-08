@@ -7,7 +7,9 @@ const postSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : 'userModel'
     },
-    date : Date,
+    date : {
+        type: Date,
+    },
     post : String
 },{
     timestamps: true

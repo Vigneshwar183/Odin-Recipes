@@ -1,14 +1,21 @@
 const async = require('async')
 const User = require('../models/user')
 const Post = require('../models/posts')
+const mongoose = require('mongoose')
 const {body, validationResult, validationErrors} = require('express-validator')
 const brycpt = require('bcryptjs')
 const userModel = require('../models/user')
 const passport = require('passport')
 const localStrategy = require('passport-local')
+require('dotenv').config()
 
-exports.index_get = (req, res, next)=>{
-    res.render('index', {title: 'Home', user: req.user})
+exports.index_get = async (req, res, next)=>{
+    var result= await Post.find().sort({date: 1}).populate('user')
+    if (result){
+        res.render('index', {title: 'Home', user: req.user, posts: result})
+    } else {
+        res.render('index', {title: 'Home',user: req.user, posts: null})
+    }
 }
 
 exports.index_post = (req, res, next)=>{
@@ -63,7 +70,8 @@ exports.sign_up_post = [
                     last_name: req.body.last_name,
                     password: hashedPassword,
                     username: req.body.username,
-                    membershipStatus: false
+                    membershipStatus: false,
+                    admin: false
                 })
                 user.save((err)=>{
                     if (err){
@@ -84,3 +92,68 @@ exports.login_post = passport.authenticate('local',{
     successRedirect:'/',
     failureRedirect:'/login'
 })
+
+exports.logout = (req, res, next)=>{
+    req.logout(function(err){
+        if (err){
+            return next(err)
+        }
+        res.redirect('/')
+    })
+}
+
+exports.member_form_get = (req, res, next)=>{
+    if (!res.locals.user){
+        return res.redirect('/login')
+    }
+    res.render('member_form', {title: 'Member Form', user: res.locals.user})
+}
+
+exports.member_form_post = (req, res, next)=>{
+    if (req.body.membercode != process.env.membercode){
+        var error = new Error('Member code error')
+        error.msg = 'Incorrect member code'
+        res.render('member_form', {title: 'Member form', user: res.locals.user, error: error})
+    }
+    var user = new User(res.locals.user)
+    user.membershipStatus = true
+    User.findByIdAndUpdate(res.locals.user._id, user, {}, (err)=>{
+        if (err){
+            return next(err)
+        }
+        res.redirect('/')
+    })
+}
+
+exports.admin_form_get = (req, res, next)=>{
+    if (!res.locals.user){
+        res.redirect('/login')
+    }
+    res.render('admin_form', {title: 'Admin form', user: res.locals.user})
+}
+
+exports.admin_form_post = [
+    body('passcode', 'passocode cannot be empty').trim().isLength({min:1}),
+    (req, res, next)=>{
+        const errors = validationResult(req)
+        if (!errors.isEmpty()){
+            res.render('admin_form', {title: 'Admin Form', user:res.locals.user, errors: errors.array()})
+        }   else if (req.body.passcode!= process.env.admincode){
+            var error = new Error('Passcode error')
+            error.msg = 'Incorrect Passcode'
+            var errorArray = []
+            errorArray.push(error)
+            res.render('admin_form', {title: 'Admin Form', user:res.locals.user, errors:errorArray})
+        }
+        var user= new User(res.locals.user)
+        user.admin= true
+        user.membershipStatus= true
+        User.findByIdAndUpdate(res.locals.user._id, user, {}, (err)=>{
+            if (err){
+                return next(err)
+            }
+            res.redirect('/')
+        })
+        
+    }
+]

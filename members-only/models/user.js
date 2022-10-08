@@ -22,7 +22,8 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     },
-    membershipStatus : Boolean
+    membershipStatus : Boolean,
+    admin: Boolean
 })
 
 UserSchema.virtual('url').get(function(){

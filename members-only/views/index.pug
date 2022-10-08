@@ -2,14 +2,37 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
 
   if user
     p Welcome back #{user.username}
-    form(method='POST' action='')
-      button.btn.btn-primary(type='submit') Submit
+    p
+      a(href='/logout') Log out
+    p  
+      a(href='/create_posts') Create Post
+    p
+      a(href='/member_form') Member Form
+    p 
+      a(href='/admin_form') Admin Form
+  
+  else
+    p Welcome to #{title}
+    p 
+      a(href='/sign-up') Sign Up 
+    p 
+      a(href='/login') Login
 
-  p 
-    a(href='/sign-up') Sign Up 
-  p 
-    a(href='/login') Login
+  if (posts.length>0)
+    p Posts 
+      each post in posts 
+        div.post-container
+          h4= post.name
+          p= post.post
+          
+          if (user && user.membershipStatus)
+            p Posted by: #{post.user.username}
+            p #{post.date}
+          if (user && user.admin)
+            form(method='POST' action='')
+              input#postId.form-control(type='hidden' name='postId' value=post._id)
+              button.btn.btn-primary(type='submit') Delete
+
