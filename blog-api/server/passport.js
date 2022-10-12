@@ -30,4 +30,5 @@ passport.use(new JWTStrategy({
         }
         return done(null, user)
     })
+
 }))
