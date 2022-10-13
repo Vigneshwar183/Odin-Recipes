@@ -1,6 +1,7 @@
 import React from 'react';
 
 function SignUp(){
+    const url = 'http:/localhost:3000/auth/sign_up'
     return(
         <div>
             <h1>Sign up Page</h1>
