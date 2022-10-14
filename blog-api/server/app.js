@@ -27,6 +27,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+const cors = require('cors');
+app.use(cors())
 
 const auth = require('./routes/auth')
 const users = require('./routes/users')

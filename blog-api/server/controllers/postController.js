@@ -31,7 +31,7 @@ exports.post_form_post = [
 ]
 
 exports.post_list_get = (req, res, next)=>{
-    Post.find({published: true}).sort({date: 1}).populate('author').exec((err, posts)=>{
+    Post.find({published: 'true'}).sort({date: 1}).populate('author').exec((err, posts)=>{
         if (err){
             return next(err)
         }
@@ -73,7 +73,7 @@ exports.post_publish = async(req, res, next)=>{
     post.published = true
     post.publishedAt = Date.now()
     console.log(post)
-    Post.findByIdAndUpdate(req.body._id, post, {}, (err)=>{
+    Post.findByIdAndUpdate(req.body.postId, post, {}, (err)=>{
         if (err){
             return next(err)
         }
