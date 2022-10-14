@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { module } = require('./user')
 
 const Schema = mongoose.Schema
 
@@ -10,21 +9,24 @@ var postSchema = new Schema({
     },
     author: {
         type: Schema.Types.ObjectId,
-        ref: userModel
+        ref: 'userModel'
     },
-    date: new Date,
+    post : String,
     comments: [{
         commentAuthor: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: 'userModel',
             required: true
         },
-        commentDate: new Date,
+        commentDate: Date,
         comment: {
             type: String,
             required: true
         }
     }],
-    published : Boolean 
+    published : Boolean,
+    createdAt : Date,
+    publishedAt : Date
 })
 
 postSchema.virtual('url').get(function(){

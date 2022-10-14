@@ -5,9 +5,10 @@ const User = require('./models/user');
 const passportJWT = require('passport-jwt');
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
+require('dotenv').config();
 
 passport.use(new LocalStrategy((username, password, done)=>{
-    User.findOne({username}).exec((err, result)=>{
+    User.findOne({username}).exec((err, user)=>{
         if (err){
             return done(err)
         }else if (!user){
@@ -19,9 +20,9 @@ passport.use(new LocalStrategy((username, password, done)=>{
 
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'secret'
+    secretOrKey: process.env.jwtsecret
 },function(jwtPayload, done){
-    User.findOneById(jwtPayload.id).exec((err, user)=>{
+    User.findById(jwtPayload._id).exec((err, user)=>{
         if (err){
             return done(err, false)
         }

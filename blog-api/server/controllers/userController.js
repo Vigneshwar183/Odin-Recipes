@@ -19,7 +19,7 @@ exports.sign_up_post = [
             error.status = 400;
             res.json({user: null, error: error})
         } else if (!errors.isEmpty()){
-            res.json({user:false, error: errors})
+            res.json({user:null, error: errors})
         } else {
             bcrypt.hash(req.body.password, 10, (err, hashedPassword)=>{
                 if (err){

@@ -1,11 +1,14 @@
+const async = require('async');
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const userController = require('../controllers/userController');
+const User = require('../models/user');
+require('dotenv').config();
 
 router.post('/login', (req, res, next)=>{
-    passport.authenticate('local', {session: false}, (err, user, info)=>{
+    passport.authenticate('local', {session: false}, async(err, user)=>{
         if (err || !user){
             return res.status(400).json({
                 message: 'Error',
@@ -16,16 +19,12 @@ router.post('/login', (req, res, next)=>{
             if (err){
                 res.send(err);
             }
-            const token = jwt.sign(user, 'secret_key');
-            return res.json({user, token})
+            const token = jwt.sign(user.toJSON(), process.env.jwtsecret);
+            return res.json({user:user, token: token})
         })
     })(req, res)
 })
 
 router.post('/sign_up', userController.sign_up_post)
-
-router.post('/a', (req, res, next)=>{
-    res.json({'user':'user'})
-})
 
 module.exports = router
