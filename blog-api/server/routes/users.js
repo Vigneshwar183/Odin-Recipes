@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const Post = require('../models/post');
-const postController = require('../controllers/postController')
+const postController = require('../controllers/postController');
+const commentController = require('../controllers/commentController');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -20,6 +21,10 @@ router.post('/deletePost', postController.post_delete)
 
 router.post('/publishPost', postController.post_publish)
 
-router.post('post', postController.post_get)
+router.post('/post/:id', postController.post_get)
+
+router.post('/post/:id/createComment', commentController.comment_post)
+
+router.post('/post/:id/deleteComment', commentController.comment_delete)
 
 module.exports = router;
