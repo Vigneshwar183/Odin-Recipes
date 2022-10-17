@@ -6,13 +6,13 @@ const bcrypt = require('bcryptjs');
 
 exports.sign_up_post = [
     body('firstName').trim().isLength({min:1}).escape(),
-    body('secondName').trim().isLength({min:1}).escape(),
+    body('lastName').trim().isLength({min:1}).escape(),
     body('username').trim().isLength({min:1}).escape(),
 
     async (req, res, next)=>{
+        console.log(req.body)
         const errors = validationResult(req);
         const usernameExists = await User.findOne({username: req.body.username})
-        console.log(req.body);
         if (usernameExists){
             const error = new Error('username exists');
             error.msg = 'username exists';
@@ -27,7 +27,7 @@ exports.sign_up_post = [
                 } 
                 var user = new User({
                     firstName: req.body.firstName,
-                    secondName: req.body.secondName,
+                    lastName: req.body.lastName,
                     username: req.body.username,
                     password: hashedPassword
                 })
@@ -35,7 +35,7 @@ exports.sign_up_post = [
                     if (err){
                         return next(err)
                     }
-                    res.json({user:user})
+                    res.json({signedUp: true})
                 })
             })
         }

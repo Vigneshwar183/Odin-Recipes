@@ -7,7 +7,6 @@ function Home(){
         async function getData(){
             const response = await fetch('http://localhost:3000/',{method:'GET'})
             const tempData=await response.json()
-            console.log(tempData.posts)
             setPost(tempData.posts)
         }
         getData()
