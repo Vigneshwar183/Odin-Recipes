@@ -5,20 +5,20 @@ const {body, validationResult} = require('express-validator');
 
 exports.post_form_post = [
     body('title').trim().isLength({min:1}).escape(),
-    body('author').trim().isLength({min:1}).escape(),
     body('post').trim().isLength({min:1}).escape(),
 
     (req, res, next)=>{
         const errors = validationResult(req);
+        console.log(req.body)
         if (!errors.isEmpty()){
             res.json({user: null, error: errors})
-        }
+        }else{
         var post = new Post({
             title: req.body.title,
-            author: req.user._id,
+            author: req.body.userId,
             createdAt: Date.now(),
             published: false,
-            comments: null,
+            comments: [],
             post : req.body.post
         })
         post.save((err)=>{
@@ -27,6 +27,7 @@ exports.post_form_post = [
             }
             res.json({post: post})
         })
+        }      
     }
 ]
 

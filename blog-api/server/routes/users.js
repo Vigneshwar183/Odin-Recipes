@@ -13,7 +13,7 @@ router.post('/profile', (req, res, next)=>{
   res.send('req.user')
 })
 
-router.post('/posts', postController.post_list_user_get)
+router.get('/posts', postController.post_list_user_get)
 
 router.post('/createPost', postController.post_form_post)
 

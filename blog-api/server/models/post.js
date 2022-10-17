@@ -11,18 +11,13 @@ var postSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'userModel'
     },
-    post : String,
+    post : {
+        type:String,
+        required: true
+    },
     comments: [{
-        commentAuthor: {
-            type: Schema.Types.ObjectId,
-            ref: 'userModel',
-            required: true
-        },
-        commentDate: Date,
-        comment: {
-            type: String,
-            required: true
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'commentModel'
     }],
     published : Boolean,
     createdAt : Date,

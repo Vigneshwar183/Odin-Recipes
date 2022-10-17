@@ -5,7 +5,8 @@ const loginReducer = (state={}, action) =>{
                 ...state,
                 token: action.payload.token,
                 username: action.payload.user.username,
-                userId: action.payload.user._id
+                userId: action.payload.user._id,
+                loggedIn: action.payload.loggedIn
             }
             return clonedStore
         default:

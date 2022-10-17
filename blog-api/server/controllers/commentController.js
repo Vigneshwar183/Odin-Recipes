@@ -1,5 +1,6 @@
 const async = require('async');
 const mongoose = require('mongoose');
+const User = require('../models/user')
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 const {body, validationResult} = require('express-validator');
@@ -7,10 +8,11 @@ const {body, validationResult} = require('express-validator');
 exports.comment_post = [
     body('comment').trim().isLength({min:1}).escape(),
 
-    (req, res, next)=>{
+    async (req, res, next)=>{
         const errors = validationResult(req)
         if (!errors.isEmpty()){
             return next(err)
+            
         }
         var comment = new Comment({
             author: req.body.userId,
@@ -18,9 +20,14 @@ exports.comment_post = [
             comment: req.body.comment,
             date: Date.now()
         })
+        
         comment.save((err)=>{
             if (err) return next(err)
-            res.json({comment: comment})
+        })
+        
+        Post.findOneAndUpdate({_id:req.body.postId},{$push:{comments:comment}}).exec((err,post)=>{
+            if (err) return next(err)
+            res.json(post)
         })
     }
 ]

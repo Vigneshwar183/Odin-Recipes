@@ -11,7 +11,10 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'postModel'
     },
-    comment: String,
+    comment: {
+        type:String,
+        required: true
+    },
     date: Date
 })
 
