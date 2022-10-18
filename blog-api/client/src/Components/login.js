@@ -24,7 +24,6 @@ function Login(){
 
     useEffect(()=>{
         console.log(temp)
-        console.log(temp.loggedIn)
     },[temp])
 
     return(

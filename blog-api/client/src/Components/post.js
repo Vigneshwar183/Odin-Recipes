@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-function Post({id}){
+function Post(postId){
+    console.log(postId)
     const [postData, setPostData] = useState({})
-    const url= 'http://localhost:3000/post/'+id;
+    const url= 'http://localhost:3000/post/'+postId;
 
     useEffect(()=>{
         async function getData(){
-            const response = fetch(url,{method:'POST',  headers:{'Content-Type':'application/json'} })
-            const tempData = response.json()
+            const response = await fetch(url,{method:'POST',  headers:{'Content-Type':'application/json'},body:JSON.stringify(postId)})
+            const tempData = await response.json()
             console.log(tempData)
             setPostData(tempData)
         }

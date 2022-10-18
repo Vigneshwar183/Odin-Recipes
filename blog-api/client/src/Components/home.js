@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
+import '../Components/styles/home.css';
 
 function Home(){
     const [posts, setPost] = useState([])
     const isLoggedIn = useSelector((state)=>state.login.loggedIn)
-    console.log(isLoggedIn)
 
     useEffect(()=>{
         async function getData(){
@@ -18,40 +18,40 @@ function Home(){
     return(
         <div>
             <h1>Home Page</h1>
-            <>
-            { !isLoggedIn? <>
-                <div>
-                    <Link to='/signup'>
-                        <p>Sign Up</p>
-                    </Link>
+            { !isLoggedIn? 
+                <div className='header'>
+                    <div className='header-content'>
+                        <Link to='/signup'>
+                            <p>Sign Up</p>
+                        </Link>
+                    </div>
+                    <div className='header-content'>
+                        <Link to='login'>
+                            <p>Login</p>
+                        </Link>
+                    </div>
                 </div>
-                <div>
-                    <Link to='login'>
-                        <p>Login</p>
-                    </Link>
-                </div>
-            </>
-            :<>
-                <div>
+            :<div className='header'>
+                <div className='header-content'>
                     <Link to='/createPost'>
                         <p>Create Post</p>
                     </Link>
                 </div>
-                <div>
-                    <Link to='users/posts'>
+                <div className='header-content'>
+                    <Link to='/viewPosts'>
                         <p>View Posts</p>
                     </Link>
                 </div>
-            </>
-            }</>
+            </div>
+            }
             {posts.map((post)=>(
-                <Link>
-                    <div className='home-post' key={post._id}>
-                        <p>{post.author.username}</p>
+                <div key={post._id}>
+                    <div className='home-post' >
+                        {isLoggedIn?<Link to='/viewPosts'><p>{post.author.username}</p></Link>:<p>{post.author.username}</p>}
                         <p>{post.publishedAt}</p>
-                        <p>{post.post}</p>
+                        {isLoggedIn?<Link to='/post'><p>{post.post}</p></Link>:<p>{post.post}</p>}
                     </div>                    
-                </Link>
+                </div>
             ))}
         </div>
     )

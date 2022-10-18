@@ -1,0 +1,12 @@
+.home-post{
+    background-color: grey;
+}
+
+.header{
+    display: flex;
+}
+
+.header-content{
+    display:flex;
+    margin: 10px;
+}

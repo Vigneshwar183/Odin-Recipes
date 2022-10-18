@@ -41,7 +41,7 @@ exports.post_list_get = (req, res, next)=>{
 }
 
 exports.post_list_user_get = (req, res, next)=>{
-    Post.find({author: req.body.userId}).sort({date:1}).populate('author').exec((err,posts)=>{
+    Post.find({author: req.body.userId}).sort({date:1}).populate('author').populate({path:'comments',populate:{path:'author'}}).exec((err,posts)=>{
         if (err){
             return next(err)
         }

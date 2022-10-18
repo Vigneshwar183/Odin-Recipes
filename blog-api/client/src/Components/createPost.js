@@ -28,6 +28,11 @@ function CreatePost(){
                     Home
                 </div>
             </Link>
+            <Link to='/viewPosts'>
+                <div>
+                    View Posts
+                </div>
+            </Link>
             <h1>Create Post</h1>
             <form method='POST' action='' onSubmit={handleSubmit}>
                 <div className='form-group'>
