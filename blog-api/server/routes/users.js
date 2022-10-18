@@ -15,6 +15,8 @@ router.post('/profile', (req, res, next)=>{
 
 router.post('/posts', postController.post_list_user_get)
 
+router.post('/arbitaryUser/posts', postController.post_list_arbitary_user_get)
+
 router.post('/createPost', postController.post_form_post)
 
 router.post('/deletePost', postController.post_delete)

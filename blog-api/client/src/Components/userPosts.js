@@ -14,15 +14,30 @@ function UserPosts(){
         const publishUrl= 'http://localhost:3000/users/publishPost' 
         const response = await fetch(publishUrl,{method:'POST', headers:{'Content-Type':'application/json', 'Authorization': 'Bearer '+login.token},body:JSON.stringify({postId: postId})})
         const tempData = await response.json()
-        console.log(tempData)
+        const modifiedPost = [
+            ...posts,
+        ]
+        modifiedPost.map((post, index)=>{
+            if (tempData.post._id===post._id){
+                modifiedPost.splice(index,1, tempData.post)
+            }
+        })
+        setPosts(modifiedPost)
     }
 
     const handleDelete = async(event)=>{
         const postId = event.target.parentNode.id
-        console.log(event.target.parentNode.parentNode)
         const deleteUrl= 'http://localhost:3000/users/deletePost' 
         const response = await fetch(deleteUrl,{method:'POST', headers:{'Content-Type':'application/json', 'Authorization': 'Bearer '+login.token},body:JSON.stringify({postId: postId})})
         const tempData = await response.json()
+        const afterDeletion = [
+            ...posts
+        ]
+        afterDeletion.map((post,index)=>{
+            if (tempData.post._id===post._id)
+                afterDeletion.splice(index,1)
+        })
+        setPosts(afterDeletion)
     }
 
     useEffect(()=>{
@@ -31,7 +46,17 @@ function UserPosts(){
             const tempData = await response.json()
             setPosts(tempData.posts)
         }
-        getData()
+        async function getDataArbitary(){
+            const arbitaryUrl = 'http://localhost:3000/users/arbitaryUser/posts'
+            const response = await fetch(arbitaryUrl,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+login.token},body:JSON.stringify({userId:id})})
+            const tempData = await response.json()
+            setPosts(tempData.posts)
+        }
+        if (login.userId===id){
+            getData()
+        } else{
+            getDataArbitary()
+        }
     },[])
 
 
@@ -48,15 +73,6 @@ function UserPosts(){
                             <Link to={{pathname: `${post.author._id}/viewPosts/`}}><p>{post.author.username}</p></Link>
                             <p>{post.publishedAt}</p>
                             <Link to={{pathname: `/post/${post._id}`}} ><p>{post.post}</p></Link>
-                            {
-                                post.comments.map((comment)=>(
-                                    <div className='comment' key={comment._id}>
-                                        <p>{comment.author.username}</p>
-                                        <p>{comment.comment}</p>
-                                        <hr></hr>
-                                    </div>
-                                ))
-                            }
                         </div>
                         <>
                         {

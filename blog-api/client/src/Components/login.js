@@ -23,7 +23,6 @@ function Login(){
     }
 
     useEffect(()=>{
-        console.log(temp)
     },[temp])
 
     return(

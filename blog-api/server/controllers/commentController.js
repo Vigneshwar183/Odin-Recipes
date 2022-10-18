@@ -25,10 +25,17 @@ exports.comment_post = [
             if (err) return next(err)
         })
         
-        Post.findOneAndUpdate({_id:req.body.postId},{$push:{comments:comment}}).exec((err,post)=>{
+        Post.findOneAndUpdate({_id:req.body.postId},{$push:{comments:comment}}).exec((err,posts)=>{
             if (err) return next(err)
-            res.json(post)
+            Post.find({_id:req.body.postId}).populate('author').populate({path:'comments',populate:{path:'author'}}).exec((err, post)=>{
+                if (err){
+                    return next(err)
+                }
+                res.json({posts: post})
+            })
         })
+
+        
     }
 ]
 
@@ -40,7 +47,7 @@ exports.comment_list_get = (req, res, next)=>{
 }
 
 exports.comment_delete = (req, res, next)=>{
-    Comment.findByIdAndDelete(req.body.commentId).exec((err)=>{
+    Comment.findByIdAndDelete(req.body.commentId).exec((err, comment)=>{
         if (err) return next(err)
         res.json({comment: comment})
     })

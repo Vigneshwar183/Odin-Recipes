@@ -1,6 +1,7 @@
 const async = require('async');
 const mongoose = require('mongoose');
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 const {body, validationResult} = require('express-validator');
 
 exports.post_form_post = [
@@ -49,6 +50,15 @@ exports.post_list_user_get = (req, res, next)=>{
     })
 }
 
+exports.post_list_arbitary_user_get = (req, res, next)=>{
+    Post.find({author: req.body.userId, published: true}).sort({date:1}).populate('author').populate({path:'comments',populate:{path:'author'}}).exec((err,posts)=>{
+        if (err){
+            return next(err)
+        }
+        res.json({posts: posts})
+    })
+}
+
 exports.post_get = async(req, res, next)=>{
     Post.find({_id:req.body.postId}).populate('author').populate({path:'comments',populate:{path:'author'}}).exec((err, post)=>{
         if (err){
@@ -59,12 +69,15 @@ exports.post_get = async(req, res, next)=>{
     )
 }
 
-exports.post_delete = (req, res, next)=>{
+exports.post_delete = async (req, res, next)=>{
     console.log(req.body.postId,'hi')
     Post.findByIdAndDelete(req.body.postId).exec((err, post)=>{
         if (err){
             return next(err)
         }
+        Comment.deleteMany({post:req.body.postId}).exec((err, comment)=>{
+            if (err) return next(err)
+        })
         res.json({post: post})
     })
 }
@@ -80,6 +93,9 @@ exports.post_publish = async(req, res, next)=>{
         if (err){
             return next(err)
         }
-        res.json({post: post})
+        Post.findById(req.body.postId).populate('author').populate({path:'comments',populate:{path:'author'}}).exec((err,result)=>{
+            if (err) return next(err)
+                res.json({post: result})
+        })
     })
 }
