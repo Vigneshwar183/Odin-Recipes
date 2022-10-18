@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import '../Components/styles/userPosts.css';
 
 function UserPosts(){
+    const {id} = useParams()
     const url = 'http://localhost:3000/users/posts'
     const login = useSelector((state)=>state.login)
     const [posts, setPosts] = useState([])
@@ -16,14 +17,23 @@ function UserPosts(){
         console.log(tempData)
     }
 
+    const handleDelete = async(event)=>{
+        const postId = event.target.parentNode.id
+        console.log(event.target.parentNode.parentNode)
+        const deleteUrl= 'http://localhost:3000/users/deletePost' 
+        const response = await fetch(deleteUrl,{method:'POST', headers:{'Content-Type':'application/json', 'Authorization': 'Bearer '+login.token},body:JSON.stringify({postId: postId})})
+        const tempData = await response.json()
+    }
+
     useEffect(()=>{
         async function getData(){
-            const response = await fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+login.token},body:JSON.stringify({userId:login.userId})})
+            const response = await fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+login.token},body:JSON.stringify({userId:id})})
             const tempData = await response.json()
             setPosts(tempData.posts)
         }
         getData()
     },[])
+
 
     return(
         <div>
@@ -35,13 +45,13 @@ function UserPosts(){
                 posts.map((post)=>(
                     <div className='userpost-post' key={post._id} >
                         <div className='posts' >
-                            <Link to='/viewPosts'><p>{post.author.username}</p></Link>
+                            <Link to={{pathname: `${post.author._id}/viewPosts/`}}><p>{post.author.username}</p></Link>
                             <p>{post.publishedAt}</p>
                             <Link to={{pathname: `/post/${post._id}`}} ><p>{post.post}</p></Link>
                             {
                                 post.comments.map((comment)=>(
                                     <div className='comment' key={comment._id}>
-                                        {/* <p>{comment.author.username}</p> */}
+                                        <p>{comment.author.username}</p>
                                         <p>{comment.comment}</p>
                                         <hr></hr>
                                     </div>
@@ -50,9 +60,20 @@ function UserPosts(){
                         </div>
                         <>
                         {
-                            !post.published?
-                                <button type='submit' onClick={(key)=>handleSubmit(key)}> Publish</button>
-                            :<p>published</p>
+                            login.userId===post.author._id?
+                            <div>
+                            {   
+                                <div className='button' id={post._id} >
+                                    <button type='button' onClick={(key)=>handleDelete(key)}> Delete</button>
+                                    {!post.published?
+                                    <button type='submit' onClick={(key)=>handleSubmit(key)}> Publish</button>
+                                    :<p>published:{(post.published).toString()}</p>}
+                                </div>
+                            }
+                            </div>:
+                            <div>
+                                <p>Published:{post.published.toString()}</p>
+                            </div>
                         }
                         </>
                     </div>

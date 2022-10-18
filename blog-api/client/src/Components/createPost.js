@@ -28,7 +28,7 @@ function CreatePost(){
                     Home
                 </div>
             </Link>
-            <Link to='/viewPosts'>
+            <Link to={{pathname: `/${login.userId}/viewPosts/`}}>
                 <div>
                     View Posts
                 </div>

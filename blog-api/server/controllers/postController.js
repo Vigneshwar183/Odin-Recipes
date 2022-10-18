@@ -60,7 +60,8 @@ exports.post_get = async(req, res, next)=>{
 }
 
 exports.post_delete = (req, res, next)=>{
-    Post.findByIdAndDelete(req.body.postId).exec((err)=>{
+    console.log(req.body.postId,'hi')
+    Post.findByIdAndDelete(req.body.postId).exec((err, post)=>{
         if (err){
             return next(err)
         }

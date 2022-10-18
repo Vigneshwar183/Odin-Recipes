@@ -5,7 +5,7 @@ import '../Components/styles/home.css';
 
 function Home(){
     const [posts, setPost] = useState([])
-    const isLoggedIn = useSelector((state)=>state.login.loggedIn)
+    const login = useSelector((state)=>state.login)
 
     useEffect(()=>{
         async function getData(){
@@ -18,7 +18,7 @@ function Home(){
     return(
         <div>
             <h1>Home Page</h1>
-            { !isLoggedIn? 
+            { !login.loggedIn? 
                 <div className='header'>
                     <div className='header-content'>
                         <Link to='/signup'>
@@ -38,7 +38,7 @@ function Home(){
                     </Link>
                 </div>
                 <div className='header-content'>
-                    <Link to='/viewPosts'>
+                    <Link to={{pathname: `${login.userId}/viewPosts/`}}>
                         <p>View Posts</p>
                     </Link>
                 </div>
@@ -47,9 +47,9 @@ function Home(){
             {posts.map((post)=>(
                 <div key={post._id}>
                     <div className='home-post' >
-                        {isLoggedIn?<Link to='/viewPosts'><p>{post.author.username}</p></Link>:<p>{post.author.username}</p>}
+                        {login.loggedIn?<Link to={{pathname: `${post.author._id}/viewPosts/`}}><p>{post.author.username}</p></Link>:<p>{post.author.username}</p>}
                         <p>{post.publishedAt}</p>
-                        {isLoggedIn?<Link to={{pathname: `/post/${post._id}`}}><p>{post.post}</p></Link>:<p>{post.post}</p>}
+                        {login.loggedIn?<Link to={{pathname: `/post/${post._id}`}}><p>{post.post}</p></Link>:<p>{post.post}</p>}
                     </div>                    
                 </div>
             ))}
