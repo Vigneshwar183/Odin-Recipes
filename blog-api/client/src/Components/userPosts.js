@@ -33,15 +33,15 @@ function UserPosts(){
             <h1>All posts</h1>
             {
                 posts.map((post)=>(
-                    <div className='userpost-post' id={post._id} >
+                    <div className='userpost-post' key={post._id} >
                         <div className='posts' >
                             <Link to='/viewPosts'><p>{post.author.username}</p></Link>
                             <p>{post.publishedAt}</p>
-                            <Link to='/post/' postId={post._id}><p>{post.post}</p></Link>
+                            <Link to={{pathname: `/post/${post._id}`}} ><p>{post.post}</p></Link>
                             {
                                 post.comments.map((comment)=>(
                                     <div className='comment' key={comment._id}>
-                                        <p>{comment.author.username}</p>
+                                        {/* <p>{comment.author.username}</p> */}
                                         <p>{comment.comment}</p>
                                         <hr></hr>
                                     </div>
@@ -51,7 +51,7 @@ function UserPosts(){
                         <>
                         {
                             !post.published?
-                                <button type='submit' onClick={(id)=>handleSubmit(id)}> Publish</button>
+                                <button type='submit' onClick={(key)=>handleSubmit(key)}> Publish</button>
                             :<p>published</p>
                         }
                         </>

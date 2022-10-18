@@ -19,7 +19,7 @@ function App() {
           <Route path='/login' element={<Login></Login>}></Route>
           <Route path='/createPost' element={<CreatePost></CreatePost>}></Route>
           <Route path='/viewPosts' element={<UserPosts></UserPosts>}></Route>
-          <Route path='/post' element={<Post></Post>}></Route>
+          <Route path='/post/:id' element={<Post></Post>}></Route>
         </Routes>
       </div>
     </BrowserRouter>

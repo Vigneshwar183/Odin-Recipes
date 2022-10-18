@@ -49,7 +49,7 @@ function Home(){
                     <div className='home-post' >
                         {isLoggedIn?<Link to='/viewPosts'><p>{post.author.username}</p></Link>:<p>{post.author.username}</p>}
                         <p>{post.publishedAt}</p>
-                        {isLoggedIn?<Link to='/post'><p>{post.post}</p></Link>:<p>{post.post}</p>}
+                        {isLoggedIn?<Link to={{pathname: `/post/${post._id}`}}><p>{post.post}</p></Link>:<p>{post.post}</p>}
                     </div>                    
                 </div>
             ))}

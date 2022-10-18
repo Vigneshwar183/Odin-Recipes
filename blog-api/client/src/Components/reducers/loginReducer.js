@@ -15,8 +15,3 @@ const loginReducer = (state={}, action) =>{
 }
 
 export default loginReducer
-
-// const store= {
-//     token: null,
-//     username: null
-// }

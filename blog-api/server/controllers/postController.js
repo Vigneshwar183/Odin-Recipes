@@ -49,13 +49,14 @@ exports.post_list_user_get = (req, res, next)=>{
     })
 }
 
-exports.post_get = (req, res, next)=>{
-    Post.findById(req.body.postId).exec((err, post)=>{
+exports.post_get = async(req, res, next)=>{
+    Post.find({_id:req.body.postId}).populate('author').populate({path:'comments',populate:{path:'author'}}).exec((err, post)=>{
         if (err){
             return next(err)
         }
         res.json({posts: post})
-    })
+    }
+    )
 }
 
 exports.post_delete = (req, res, next)=>{
