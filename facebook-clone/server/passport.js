@@ -19,11 +19,13 @@ passport.use(new FacebookStrategy({
     clientSecret: process.env.FACEBOOK_API_SECRET,
     callbackURL: 'http://localhost:3000/auth/login/facebook'
   },
-  function(accessToken, refreshToken, profile, cb) {
-    console.log({accessToken, refreshToken, profile})
-    
-    User.find({facebookId:profile.id}).exec((err, user)=>{
-        if (err) return next(err)
+  async function(accessToken, refreshToken, profile, cb) {    
+    const userExists = await User.findOne({facebookId: profile.id})
+
+    if (userExists){
+        const user= userExists
+        return cb(null, user)
+    } else {
         var user = new User({
             username: profile.displayName,
             facebookId: profile.id
@@ -31,8 +33,21 @@ passport.use(new FacebookStrategy({
         user.save((err)=>{
             if (err) return next(err)
         })
-        cb(null, user)
-    })
+        return cb(null, user)
+
+    }
+
+    // User.find({facebookId:profile.id}).exec((err, user)=>{
+    //     if (err) return next(err)
+    //     var user = new User({
+    //         username: profile.displayName,
+    //         facebookId: profile.id
+    //     })
+    //     user.save((err)=>{
+    //         if (err) return next(err)
+    //     })
+    //     cb(null, user)
+    // })
 
 
     // db.get('SELECT * FROM federated_credentials WHERE provider = ? AND subject = ?', [

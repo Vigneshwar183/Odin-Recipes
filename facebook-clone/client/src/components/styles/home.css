@@ -1,0 +1,40 @@
+.Home{
+    display:flex;
+    height: 100vh;
+}
+
+.leftContainer{
+    background-color: darkgray;
+    width: 60%;
+    height: 100%;
+    align-items: center;
+}
+
+h1{
+    padding-top: 45vh;
+    width: 100%;
+    text-align: center;
+}
+
+.rightContainer{
+    background-color: grey;
+    height: 100%;
+    align-items: center;
+    width: 40%;
+}
+
+img{
+    padding-top: 35vh;
+    display:block;
+    margin-left: 40%;
+}
+
+button{
+    background-color: rgb(20, 96, 194);
+    border-radius: 10px;
+    display: block;
+    margin-left: 40%;
+    margin-top: 200px;
+    font-size: 20px;
+    color: azure;
+}

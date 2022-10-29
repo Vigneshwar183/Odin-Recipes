@@ -4,9 +4,16 @@ const passport = require('passport')
 const app = require('../app')
 const router = express.Router();
 
-router.get('/login/facebook', passport.authenticate('facebook',{
-    successRedirect:'/',
-    failureRedirect:'/auth/login/facebook'
-}))
+router.get('/login/facebook', 
+    passport.authenticate('facebook'),
+    function(req, res){
+        if(req.user){
+            console.log(req.user)
+            res.redirect('http://localhost:3001/'+req.user._id+'/')
+        } else{
+            res.redirect('/')
+        }
+    }
+)
 
 module.exports = router
