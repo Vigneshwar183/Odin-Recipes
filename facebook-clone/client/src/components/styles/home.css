@@ -3,7 +3,7 @@
     height: 100vh;
 }
 
-.leftContainer{
+.loginLeftContainer{
     background-color: darkgray;
     width: 60%;
     height: 100%;
@@ -16,20 +16,20 @@ h1{
     text-align: center;
 }
 
-.rightContainer{
+.loginRightContainer{
     background-color: grey;
     height: 100%;
     align-items: center;
     width: 40%;
 }
 
-img{
+.homeImage{
     padding-top: 35vh;
     display:block;
     margin-left: 40%;
 }
 
-button{
+.Home button{
     background-color: rgb(20, 96, 194);
     border-radius: 10px;
     display: block;

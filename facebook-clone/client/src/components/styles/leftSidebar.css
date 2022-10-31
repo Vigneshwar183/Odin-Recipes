@@ -1,0 +1,16 @@
+.leftSidebar{
+    width: 30%;
+}
+
+.iconsBody{
+    display: flex;
+    align-items: center;
+}
+
+.iconsBody .MuiSvgIcon-root{
+    margin: 20px;
+}
+
+.iconsBody img{
+    margin:20px;
+}

@@ -3,11 +3,8 @@ const loginReducer = (state={}, action) =>{
         case 'Login':
             const clonedStore = {
                 ...state,
-                accessToken: action.payload.data.accessToken,
-                username: action.payload.data.user.username,
-                userId: action.payload.data.user._id,
-                loggedIn: action.payload.data.loggedIn,
-                refreshToken: action.payload.data.refreshToken
+                username: action.payload.user.username,
+                userId: action.payload.user._id,
             }
             return clonedStore
         default:

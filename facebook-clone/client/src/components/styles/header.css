@@ -1,0 +1,29 @@
+.Header{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.leftContainer{
+    display:flex;
+    width: 30%;
+    align-items: center;
+}
+
+.centerContainer{
+    display:flex;
+    width: 30%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rightContainer{
+    display:flex;
+    width:30%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.headerImage{
+    height:50px;
+}

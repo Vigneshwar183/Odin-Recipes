@@ -1,36 +1,48 @@
 import React , {useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import './styles/home.css'
+import Header from './header';
+import Body from './body'
 
 function Home() {
-  const login = useSelector((state)=>state.login)
   const {id} = useParams()
+  const dispatch = useDispatch()
 
   async function handleLogin(event){
     window.open('http://localhost:3000/auth/login/facebook', '_self')
-    
+  }
+
+  async function getUserData(){
+    const response = await fetch('http://localhost:3000/',{method:'POST', headers: {'Content-Type':'application/json'}, body:JSON.stringify({id:id})})
+    const tempData = await response.json()
+    dispatch({type:'Login', payload:tempData})
   }
 
   useEffect(()=>{
-  },[login])
+    if(id) {
+      getUserData()
+    }
+  },[])
 
   return (
     <>
-      { !id?<>
-        <div className="Home">
-          <div className='leftContainer'>
-            <h1>Welcome to Facebook clone</h1>
+      { !id?
+        <>
+          <div className="Home">
+            <div className='loginLeftContainer'>
+              <h1>Welcome to Facebook clone</h1>
+            </div>
+            <div className='loginRightContainer'>
+              <img className='homeImage' src='' alt='facebook-logo'></img>
+              <button type='submit' onClick={handleLogin}>Login with Facebook</button>
+            </div>
           </div>
-          <div className='rightContainer'>
-            <img src='' alt='facebook-logo'></img>
-            <button type='submit' onClick={handleLogin}>Login with Facebook</button>
-          </div>
-        </div>
-      </>:<>
-        <h1>Logged In</h1>
-        <p>{id}</p>
-      </>
+        </>:
+        <>
+          <Header></Header>
+          <Body></Body>
+        </>
       }
     </>
   );
