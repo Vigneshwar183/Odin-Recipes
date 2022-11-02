@@ -8,7 +8,6 @@ router.get('/login/facebook',
     passport.authenticate('facebook'),
     function(req, res){
         if(req.user){
-            console.log(req.user)
             res.redirect('http://localhost:3001/'+req.user._id+'/')
         } else{
             res.redirect('/')

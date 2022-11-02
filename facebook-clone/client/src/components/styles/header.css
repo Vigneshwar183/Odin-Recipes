@@ -24,6 +24,10 @@
     justify-content: flex-end;
 }
 
+.rightContainer .icons{
+    margin: 5px;
+}
+
 .headerImage{
     height:50px;
 }

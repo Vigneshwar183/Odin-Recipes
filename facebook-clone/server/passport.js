@@ -28,7 +28,14 @@ passport.use(new FacebookStrategy({
     } else {
         var user = new User({
             username: profile.displayName,
-            facebookId: profile.id
+            facebookId: profile.id,
+            firstName: '',
+            lastName: '',
+            dateOfBirth: '',
+            posts: [],
+            friendList: [],
+            profilePicture: '',
+            coverPhoto: ''
         })
         user.save((err)=>{
             if (err) return next(err)

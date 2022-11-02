@@ -1,0 +1,27 @@
+.postHeader{
+    display:flex;
+    padding: 10px;
+    align-items: center;
+}
+
+.postUserData{
+    margin-left: 5px;
+}
+
+.postUserData p{
+    font-size: x-small;
+}
+
+.postContent{
+    padding: 10px;
+}
+
+.postData{
+    display:flex;
+    padding: 10px;
+}
+
+.postFooter{
+    display:flex;
+    justify-content: space-around;
+}

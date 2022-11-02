@@ -1,0 +1,37 @@
+.ModalBackground{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+}
+
+.ModalContainer{
+    box-shadow: black 0px 5px 15px;
+    border-radius: 20px;
+    width: 250px;
+    height: 250px;
+    padding: 25px;
+    background-color: white;
+}
+
+.ModalHeader{
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    align-items: center;
+}
+
+.ModalHeader h1{
+    display: inline;
+}
+
+.ModalContent textarea{
+    width: 100%;
+}
+
+.ModalFooter button{
+    width: 100%;
+    margin-top: 20px;
+}
