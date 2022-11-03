@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useParams} from 'react-router-dom'
 import './styles/createPostModal.css'
 
-function CreatePostModal({closeModal}){
+function CreatePostModal({closeModal, handlePageRefresh}){
     const {id} = useParams()
     const [post, setPost] = useState('')
 
@@ -18,6 +18,7 @@ function CreatePostModal({closeModal}){
         const response = await fetch('http://localhost:3000/createPost',{method:'POST', headers: {'Content-Type':'application/json'}, body:JSON.stringify(formData)})
         const tempData = await response.json()
         console.log(tempData)
+        handlePageRefresh()
         CloseModalHandler()
     }
 

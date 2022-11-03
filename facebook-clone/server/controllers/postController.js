@@ -37,9 +37,21 @@ exports.createPost = [
 ]
 
 exports.getPost = (req, res, next)=>{
-    console.log(req.body.userId)
     Post.find({author: req.body.userId}).sort({createdAt:1}).populate('author').exec((err, posts)=>{
         if (err) return next(err)
         res.json({posts: posts})
+    })
+}
+
+exports.likeDislikePost = async(req, res, next) =>{
+    const post = await Post.findById(req.body.postId)
+    if (req.body.like){
+        post.likes+=1
+    } else {
+        post.likes-=1
+    }
+    Post.findByIdAndUpdate(req.body.postId, post, {}, (err)=>{
+        if (err) return next(err)
+        res.json({post:post})
     })
 }

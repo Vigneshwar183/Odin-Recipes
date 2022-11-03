@@ -1,6 +1,5 @@
 .BodyContent{
     width: 40%;
-    background-color: azure;
 }
 
 .createPost{
@@ -8,4 +7,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 10px;
 }

@@ -15,7 +15,7 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
-    date: Date,
+    createdAt: Date,
     likes: Number
 })
 

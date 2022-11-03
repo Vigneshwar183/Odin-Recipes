@@ -1,0 +1,26 @@
+.createComment{
+    display:flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.commentBody p{
+    margin-left: 15px;
+}
+
+.individualCommentBody{
+    display: flex;
+    align-items: center;
+}
+
+.individualCommentBody img{
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+.comment{
+    background-color: lightgray;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    padding-right: 10px;
+}

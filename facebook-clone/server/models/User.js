@@ -28,7 +28,8 @@ const userSchema = new Schema({
         ref: 'postModel'
     }],
     friendList: [{
-        type: Number
+        type: Schema.Types.ObjectId,
+        ref: 'userModel'
     }],
     profilePicture:{
         type: String
