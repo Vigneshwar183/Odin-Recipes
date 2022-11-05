@@ -10,6 +10,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import './styles/header.css'
 import Notifications from './notifications';
+import facebookLogo from './images/facebook-logo.png';
 
 function Header(){
     const user = useSelector((state)=>state.login)
@@ -33,7 +34,7 @@ function Header(){
     return(
         <div className='Header'>
             <div className='leftContainer'>
-                <img className='headerImage' src='' alt='facebookLogo'></img>
+                <img className='headerImage' src={facebookLogo} alt='facebookLogo'></img>
                 <div className='searchBar'>
                     <input type='text' placholder='search'></input>
                 </div>

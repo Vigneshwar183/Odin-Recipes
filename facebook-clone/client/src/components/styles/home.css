@@ -23,18 +23,21 @@
     width: 40%;
 }
 
-.homeImage{
-    padding-top: 35vh;
-    display:block;
-    margin-left: 40%;
-}
-
 .Home button{
     background-color: rgb(20, 96, 194);
     border-radius: 10px;
-    display: block;
     margin-left: 40%;
     margin-top: 200px;
     font-size: 20px;
     color: azure;
+    display:flex;
+    align-items: center;
+}
+
+button img{
+    background-color: aqua;
+    display: flex;
+    color: white;
+    width: 30px;
+    height: auto;
 }

@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom';
 import './styles/home.css'
 import Header from './header';
 import Body from './body'
+import facebookLogo from './images/facebook-logo.png'
 
 function Home() {
   const {id} = useParams()
@@ -34,8 +35,7 @@ function Home() {
               <h1>Welcome to Facebook clone</h1>
             </div>
             <div className='loginRightContainer'>
-              <img className='homeImage' src='' alt='facebook-logo'></img>
-              <button type='submit' onClick={handleLogin}>Login with Facebook</button>
+              <button onClick={handleLogin}><img className='homeImage' src={facebookLogo} alt='facebook-logo'></img>Login with Facebook</button>
             </div>
           </div>
         </>:
