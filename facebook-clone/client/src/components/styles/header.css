@@ -31,3 +31,22 @@
 .headerImage{
     height:50px;
 }
+
+.list{
+    display: block;
+    position: absolute;
+    text-align: left;
+    width: 150px;
+    right: 0;
+    left: auto;
+}
+
+.listItems{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.MuiSvgIcon-root{
+    display:block;
+    position: relative;
+}

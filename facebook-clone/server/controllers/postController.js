@@ -17,7 +17,7 @@ exports.createPost = [
                 post: req.body.post,
                 comments: [],
                 createdAt: Date.now(),
-                likes: 0
+                likedBy: []
             })
 
             post.save((err)=>{
@@ -46,15 +46,25 @@ exports.getPost = (req, res, next)=>{
 
 exports.likeDislikePost = async(req, res, next) =>{
     const post = await Post.findById(req.body.postId)
+
     if (req.body.like){
-        post.likes+=1
+        post.likedBy.push(req.body.userId)
+        Post.findByIdAndUpdate(post._id, post, {}, (err, temp)=>{
+            if (err) return next(err)
+            Post.findById(post._id).populate('author').exec((err, post)=>{
+                if (err) return next(err)
+                res.json({post:post})
+            })
+        })
+        
     } else {
-        post.likes-=1
+        if (post.likedBy && post.likedBy.includes(req.body.userId)) post.likedBy.remove(req.body.userId)
+        Post.findByIdAndUpdate(post._id, post, {}).populate('author').exec((err, post)=>{
+            if (err) return next(err)
+            res.json({post:post})
+        })
     }
-    Post.findByIdAndUpdate(req.body.postId, post, {}, (err)=>{
-        if (err) return next(err)
-        res.json({post:post})
-    })
+
 }
 
 exports.deletePost = (req, res, next) =>{

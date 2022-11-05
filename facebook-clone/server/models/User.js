@@ -36,7 +36,11 @@ const userSchema = new Schema({
     },
     coverPhoto: {
         type: String
-    }
+    }, 
+    notifications:[{
+        type: Schema.Types.ObjectId,
+        ref: 'userModel'
+    }]
 })
 
 userSchema.virtual('url').get(function(){

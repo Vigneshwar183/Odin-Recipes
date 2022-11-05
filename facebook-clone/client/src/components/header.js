@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import HomeIcon from '@mui/icons-material/Home';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
@@ -9,9 +9,26 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MessageIcon from '@mui/icons-material/Message';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import './styles/header.css'
+import Notifications from './notifications';
 
 function Header(){
     const user = useSelector((state)=>state.login)
+    const [currentUser, setCurrentUser] = useState({})
+    const [viewNotifications, setViewNotifications] = useState(false)
+
+    const handleSetNotifications = () =>{
+        setViewNotifications(!viewNotifications)
+    }
+
+
+    useEffect(()=>{
+        async function getUserData(){
+            const response = await fetch('http://localhost:3000/notifications',{method:'POST', headers: {'Content-Type':'application/json'}, body:JSON.stringify({id:user.userId})})
+            const tempData = await response.json()
+            setCurrentUser({...tempData.user})
+        }
+        if(user) getUserData()
+    },[user])
 
     return(
         <div className='Header'>
@@ -46,7 +63,18 @@ function Header(){
                     <MessageIcon></MessageIcon>
                 </div>
                 <div className='icons'>
-                    <NotificationsActiveIcon></NotificationsActiveIcon>
+                    <NotificationsActiveIcon onClick={handleSetNotifications}></NotificationsActiveIcon>
+                    { viewNotifications?
+                        <div className='list'>
+                            {
+                                currentUser.notifications && currentUser.notifications.length>0?currentUser.notifications.map((tempUser, index)=>{
+                                    return (
+                                        <Notifications friend={tempUser} viewNotifications={viewNotifications} setViewNotifications={setViewNotifications}></Notifications>
+                                    )
+                                }):<p>No new notifications</p>
+                            }
+                        </div>:<></>
+                    }
                 </div>
                 <div className='icons'>
                     <img className='headerImage' src='' alt='profile'></img>

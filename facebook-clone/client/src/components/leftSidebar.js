@@ -43,32 +43,6 @@ function LeftSidebar(){
                     <p>See More</p>
                 </div>
             </div>
-
-            <hr></hr>
-
-            <div className='lowerLeftBody'>
-                <div className='iconsBody'>
-                    <img src='' alt='game'></img>
-                    <p>8 Ball Pool</p>
-                </div>
-                <div className='iconsBody'>
-                    <img src='' alt='game'></img>
-                    <p>Angry Bird Friends</p>
-                </div>
-                <div className='iconsBody'>
-                    <img src='' alt='game'></img>
-                    <p>Cricket Quiz</p>
-                </div>
-                <div className='iconsBody'>
-                    <img src='' alt='game'></img>
-                    <p>Criminal Case</p>
-                </div>
-                <div className='iconsBody'>
-                    <ArrowDropDownCircleIcon></ArrowDropDownCircleIcon>
-                    <p>See More</p>
-                </div>
-            </div>
-
         </div>
     )
 }

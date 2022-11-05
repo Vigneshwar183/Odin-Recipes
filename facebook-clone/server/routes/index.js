@@ -7,6 +7,12 @@ const commentController = require('../controllers/commentController')
 /* GET home page. */
 router.post('/', userController.getUserData);
 
+router.post('/notifications', userController.getUserNotifications);
+
+router.post('/getFriends', userController.getFriends);
+
+router.post('/friendRequest', userController.friendRequest);
+
 router.post('/createPost', postController.createPost);
 
 router.post('/getPost', postController.getPost);

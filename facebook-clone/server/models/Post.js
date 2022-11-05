@@ -17,7 +17,10 @@ const postSchema = new Schema({
     }],
     post: String,
     createdAt: Date,
-    likes: Number,
+    likedBy: [{
+        type: Schema.Types.ObjectId,
+        ref: 'userModel'
+    }]
 })
 
 postSchema.virtual('url').get(function(){

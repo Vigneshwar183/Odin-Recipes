@@ -1,0 +1,19 @@
+.rightSidebar{
+    margin-left: 20px;
+    width: 25%;
+    padding-left: 100px;
+}
+
+.rightSidebar hr{
+    border-color: black;
+    border-style: solid;
+    margin-right: 30px;
+}
+
+.friendList{
+    text-align: left;
+}
+
+.People{
+    text-align: left;
+}
