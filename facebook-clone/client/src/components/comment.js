@@ -8,6 +8,7 @@ function Comment({postId}){
     const [comment, setComment] = useState('')
     const [allComments, setAllComments] = useState([])
     const [viewComment, setViewComment] = useState(false)
+    const [reRenderCommentComponent, setRerenderCommentComponent] = useState(false)
 
     const commentHandler = async(event) =>{
         setComment(event.target.value)
@@ -21,6 +22,7 @@ function Comment({postId}){
         }
         const response = await fetch('http://localhost:3000/createComment',{method:'POST', headers: {'Content-Type':'application/json'}, body:JSON.stringify(commentData)})
         const tempData = await response.json()
+        setViewComment(true)
         viewComments()
     }
 
@@ -28,13 +30,16 @@ function Comment({postId}){
         const response = await fetch('http://localhost:3000/viewComment',{method:'POST', headers: {'Content-Type':'application/json'}, body:JSON.stringify({postId: postId})})
         const tempData = await response.json()
         setAllComments(tempData.comments)
-        setViewComment(true)
-        console.log(allComments)
     }
 
-    useEffect(()=>{
+    const handleCommentRerender = ()=>{
+        setRerenderCommentComponent(!reRenderCommentComponent)
+    }
 
-    },[viewComment])
+
+    useEffect(()=>{
+        viewComments()
+    },[viewComment, reRenderCommentComponent])
 
     return(
         <div className='commentBody'>
@@ -43,11 +48,11 @@ function Comment({postId}){
                 <input type='text' placeholder='write a comment' onChange={commentHandler}></input>
                 <button type='button' onClick={commentPostHandler}>post comment</button>
             </div>                
-            <p onClick={viewComments}>View all Comments</p>
+            <p onClick={()=>setViewComment(true)}>View all Comments</p>
             { viewComment? 
                 <div>
                     {allComments.map((comment)=>
-                    (<IndividualComment comment={comment} key={comment._id}></IndividualComment>))}
+                    (<IndividualComment comment={comment} key={comment._id} handleCommentRerender={handleCommentRerender}></IndividualComment>))}
                 </div>:<></>
             }
         </div>

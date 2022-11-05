@@ -1,5 +1,6 @@
 const Post = require('../models/Post')
 const User = require('../models/User')
+const Comment = require('../models/Comment')
 const async = require('async')
 const {body, validationResult} = require('express-validator')
 
@@ -54,4 +55,21 @@ exports.likeDislikePost = async(req, res, next) =>{
         if (err) return next(err)
         res.json({post:post})
     })
+}
+
+exports.deletePost = (req, res, next) =>{
+    Post.findByIdAndDelete(req.body.postId).exec(async(err, post)=>{
+        if (err) return next(err)
+        Comment.deleteMany({post:req.body.postId}).exec((err, comment)=>{
+            if (err) return next(err)
+        })
+        const user = await User.findById(post.author)
+        user.posts.remove(req.body.postId)
+        
+        User.findByIdAndUpdate(user._id, user, {}, (err, user)=>{
+            if (err) return next(err)
+            res.json({message:'done'})
+        })
+    })
+    
 }

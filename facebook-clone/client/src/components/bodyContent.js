@@ -7,20 +7,15 @@ import AllPosts from './allPosts';
 function BodyContent(){
     const user = useSelector((state)=>state.login)
     const [openModal, setOpenModal]= useState(false)
-    const [pageRefresh, setPageRefresh] = useState(false)
+    const [postCreatePageRefresh, setPostCreatePageRefresh] = useState(false)
 
     function createPostHandler(){
         setOpenModal(true)
     }
 
-    const handlePageRefresh = ()=>{
-        if (pageRefresh) setPageRefresh(false)
-        else setPageRefresh(true)
-    }
-
     useEffect(()=>{
 
-    },[pageRefresh])
+    },[postCreatePageRefresh])
 
     return (
         <div className='BodyContent'>
@@ -28,8 +23,8 @@ function BodyContent(){
                 <img src='' alt='profile'></img>
                 <button type='button' onClick={createPostHandler}>Create Post</button>
             </div>
-            {openModal && <CreatePostModal closeModal={setOpenModal} handlePageRefresh={handlePageRefresh}></CreatePostModal>}
-            <AllPosts></AllPosts>
+            {openModal && <CreatePostModal closeModal={setOpenModal} postCreatePageRefresh={postCreatePageRefresh} setPostCreatePageRefresh={setPostCreatePageRefresh}></CreatePostModal>}
+            <AllPosts postCreatePageRefresh={postCreatePageRefresh}></AllPosts>
         </div>
     )
 }

@@ -27,3 +27,17 @@ exports.viewComment = (req, res, next)=>{
         res.json({comments:comments})
     })
 }
+
+exports.deleteComment = (req, res, next)=>{
+    Comment.findByIdAndDelete(req.body.commentId).exec(async(err, comment)=>{
+        if (err) return next(err)
+
+        const post = await Post.findById(comment.post)
+        post.comments.remove(req.body.commentId)
+        
+        Post.findByIdAndUpdate(post._id, post, {}, (err)=>{
+            if (err) return next(err)
+            res.json({post:post})
+        })
+    })
+}

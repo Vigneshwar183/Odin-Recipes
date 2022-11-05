@@ -2,12 +2,16 @@ import React, {useState} from 'react';
 import {useParams} from 'react-router-dom'
 import './styles/createPostModal.css'
 
-function CreatePostModal({closeModal, handlePageRefresh}){
+function CreatePostModal({closeModal, postCreatePageRefresh, setPostCreatePageRefresh}){
     const {id} = useParams()
     const [post, setPost] = useState('')
 
     const handleTextarea = (event)=>{
         setPost(event.target.value)
+    }
+
+    const handlePageRefresh = ()=>{
+        setPostCreatePageRefresh(!postCreatePageRefresh)
     }
     
     const submitPost = async()=>{
@@ -17,7 +21,6 @@ function CreatePostModal({closeModal, handlePageRefresh}){
         }
         const response = await fetch('http://localhost:3000/createPost',{method:'POST', headers: {'Content-Type':'application/json'}, body:JSON.stringify(formData)})
         const tempData = await response.json()
-        console.log(tempData)
         handlePageRefresh()
         CloseModalHandler()
     }

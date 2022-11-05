@@ -13,8 +13,12 @@ router.post('/getPost', postController.getPost);
 
 router.post('/likeDislikePost', postController.likeDislikePost);
 
+router.post('/deletePost', postController.deletePost)
+
 router.post('/createComment', commentController.createComment);
 
 router.post('/viewComment', commentController.viewComment);
+
+router.post('/deleteComment', commentController.deleteComment);
 
 module.exports = router;

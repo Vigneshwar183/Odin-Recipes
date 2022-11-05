@@ -10,10 +10,16 @@
 
 .individualCommentBody{
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-.individualCommentBody img{
+.individualCommentBodyLeft{
+    display: flex;
+    align-items: center;
+}
+
+.individualCommentBodyLeft img{
     margin-left: 15px;
     margin-right: 10px;
 }
